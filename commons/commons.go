@@ -150,3 +150,18 @@ func Memoize[T comparable, U any](f func(T) U) func(T) U {
 		return cache[t]
 	}
 }
+
+type Queue[T any] []T
+
+func (q Queue[T]) IsEmpty() bool { return len(q) == 0 }
+
+func (q *Queue[T]) Push(elems ...T) {
+	*q = append(*q, elems...)
+}
+
+func (q *Queue[T]) Pop() T {
+	n := len(*q)
+	elem := (*q)[n-1]
+	*q = (*q)[0 : n-1]
+	return elem
+}
