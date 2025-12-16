@@ -45,8 +45,8 @@ func contained(x1, x2 commons.Coord, coords []commons.Coord) bool {
 		eXMin, eXMax := min(c1.X, c2.X), max(c1.X, c2.X)
 		eYMin, eYMax := min(c1.Y, c2.Y), max(c1.Y, c2.Y)
 
-		// AABB test
-		if !(eXMin >= rXMax || eXMax <= rXMin || eYMin >= rYMax || eYMax <= rYMin) {
+		// AABB (Axis-Aligned Bounding Box) test
+		if eXMin < rXMax && eXMax > rXMin && eYMin < rYMax && eYMax > rYMin {
 			return false
 		}
 	}
