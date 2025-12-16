@@ -11,43 +11,28 @@ import (
 
 func main() {
 	coords := parseInput(os.Args[1])
-
-	fmt.Println("Part 1: ", part1(coords))
-	fmt.Println("Part 2: ", part2(coords))
+	fmt.Println("Part1: ", solve(coords, noFilter))
+	fmt.Println("Part2: ", solve(coords, contained))
 }
 
-func part1(coords []commons.Coord) int {
-	maximum := 0
-	for i, x1 := range coords {
-		for j := i + 1; j < len(coords); j++ {
-			x2 := coords[j]
-			maximum = max(maximum, area(x1, x2))
-		}
-	}
-
-	return maximum
-}
-
-func part2(coords []commons.Coord) int {
+func solve(coords []commons.Coord, valid func(x1, x2 commons.Coord, coords []commons.Coord) bool) int {
 	maximum := 0
 	for i, x1 := range coords {
 		for j := i + 1; j < len(coords); j++ {
 			x2 := coords[j]
 			area := area(x1, x2)
 			// Cheapest to find out if area is bigger first
-			if area <= maximum {
-				continue
+			if area > maximum && valid(x1, x2, coords) {
+				maximum = area
 			}
-			if !contained(x1, x2, coords) {
-				continue
-			}
-
-			fmt.Println("New best: ", x1, x2, area)
-			maximum = area
 		}
 	}
 
 	return maximum
+}
+
+func noFilter(x1, x2 commons.Coord, coords []commons.Coord) bool {
+	return true
 }
 
 func contained(x1, x2 commons.Coord, coords []commons.Coord) bool {
@@ -69,9 +54,9 @@ func contained(x1, x2 commons.Coord, coords []commons.Coord) bool {
 }
 
 func area(a, b commons.Coord) int {
-	xd := abs(a.X - b.X) + 1
-	yd := abs(a.Y - b.Y) + 1
-	return xd*yd
+	xd := abs(a.X-b.X) + 1
+	yd := abs(a.Y-b.Y) + 1
+	return xd * yd
 }
 
 func abs(a int) int {
