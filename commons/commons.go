@@ -160,8 +160,7 @@ func (q *Queue[T]) Push(elems ...T) {
 }
 
 func (q *Queue[T]) Pop() T {
-	n := len(*q)
-	elem := (*q)[n-1]
-	*q = (*q)[0 : n-1]
+	elem := (*q)[0]
+	*q = (*q)[1:]
 	return elem
 }
