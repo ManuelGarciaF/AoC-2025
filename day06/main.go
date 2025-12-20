@@ -73,7 +73,7 @@ func parsePart1(path string) []Problem {
 			break
 		}
 
-		parsedNums = append(parsedNums, commons.Map(strs, commons.MustAtoi))
+		parsedNums = append(parsedNums, commons.AtoiMap(strs))
 	}
 
 	// Order now that we have them all parsed

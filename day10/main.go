@@ -226,10 +226,10 @@ func parseInput(path string) []Machine {
 		buttonsRes := reButtons.FindAllStringSubmatch(s.Text(), -1)
 		buttons := make([][]int, 0, len(buttonsRes))
 		for _, match := range buttonsRes {
-			buttons = append(buttons, commons.Map(strings.Split(match[1], ","), commons.MustAtoi))
+			buttons = append(buttons, commons.AtoiMap(strings.Split(match[1], ",")))
 		}
 
-		joltages := commons.Map(strings.Split(reJoltages.FindStringSubmatch(s.Text())[1], ","), commons.MustAtoi)
+		joltages := commons.AtoiMap(strings.Split(reJoltages.FindStringSubmatch(s.Text())[1], ","))
 
 		ms = append(ms, Machine{
 			Lights:   lights,

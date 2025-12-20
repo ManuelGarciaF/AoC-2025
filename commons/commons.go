@@ -110,26 +110,12 @@ func Filter[T any](xs []T, f func(T) bool) []T {
 	return new
 }
 
-func Any[T any](xs []T, f func(T) bool) bool {
-	for _, x := range xs {
-		if f(x) {
-			return true
-		}
-	}
-	return false
-}
-
-func All[T any](xs []T, f func(T) bool) bool {
-	for _, x := range xs {
-		if !f(x) {
-			return false
-		}
-	}
-	return true
-}
-
 func Sum(xs []int) int {
 	return Foldl(0, xs, func(acc, x int) int { return acc + x })
+}
+
+func AtoiMap(strs []string) []int {
+	return Map(strs, MustAtoi)
 }
 
 // Does not work with recursive functions unless created inline with the
