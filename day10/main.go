@@ -24,7 +24,7 @@ func main() {
 	// for _, m := range machines {
 	// 	fmt.Printf("m: %v\n", m)
 	// }
-	// fmt.Println("Part1: ", commons.Sum(commons.Map(machines, minMovesLights)))
+	fmt.Println("Part1: ", commons.Sum(commons.Map(machines, minMovesLights)))
 	fmt.Println("Part2: ", part2(machines))
 }
 
